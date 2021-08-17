@@ -1,9 +1,9 @@
 {
     "HZN_ORG_ID": "dow",
     "MetadataVars": {
-        "DOCKER_IMAGE_BASE": "image-registry.openshift-image-registry.svc:5000/ritu/react:0.0.1",
+        "DOCKER_IMAGE_BASE": "image-registry.openshift-image-registry.svc:5000/edge-react/react",
         "SERVICE_NAME": "maximo-dashboard",
-        "SERVICE_VERSION": "0.0.1"
+        "SERVICE_VERSION": "0.0.5"
     }
 }
 

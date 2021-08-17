@@ -1,9 +1,9 @@
 {
     "org": "$HZN_ORG_ID",
     "label": "$SERVICE_NAME for $ARCH",
-    "description": "A super-simple sample Horizon service",
+    "description": "A super-simple Nodejs React Horizon service",
     "public": true,
-    "documentation": "https://github.com/ritu-patel/react.git",
+    "documentation": "https://github.com/smcotugno/react.git",
     "url": "$SERVICE_NAME",
     "version": "$SERVICE_VERSION",
     "arch": "$ARCH",
