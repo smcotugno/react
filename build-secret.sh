@@ -22,10 +22,15 @@ fi
 
 export HZN_ORG_ID=$1
 
+
+# API Key is not needed 
+# export EDGE_APIKEY=$2
+# export HZN_EXCHANGE_USER_AUTH=iamapikey:${EDGE_APIKEY}
+#  --from-literal=HZN_EXCHANGE_USER_AUTH=$HZN_EXCHANGE_USER_AUTH \
+
 # Extract the Core meta data for
 export MGM_HUB_INGRESS=$(oc get cm management-ingress-ibmcloud-cluster-info -n ibm-edge -o jsonpath='{.data.cluster_ca_domain}')
 export HZN_EXCHANGE_URL=https://${MGM_HUB_INGRESS}/edge-exchange/v1
-export HZN_EXCHANGE_USER_AUTH=iamapikey:${EDGE_APIKEY}
 export HZN_FSS_CSSURL=https://${MGM_HUB_INGRESS}/edge-css/
 export OCP_REG_HOST=`oc get route default-route -n openshift-image-registry --template='{{ .spec.host }}'`
 
@@ -36,11 +41,11 @@ oc serviceaccounts get-token pipeline > ./get-token-ca.crt
 # Create the Secret
 oc create secret generic edge-access \
   --from-literal=HZN_ORG_ID=$HZN_ORG_ID \
-  --from-literal=HZN_EXCHANGE_USER_AUTH=$HZN_EXCHANGE_USER_AUTH \
   --from-literal=HZN_EXCHANGE_URL=$HZN_EXCHANGE_URL \
   --from-literal=HZN_FSS_CSSURL=$HZN_FSS_CSSURL \
   --from-literal=OCP_REG_HOST=$OCP_REG_HOST \
-  --from-file=OCP_TOKEN=./get-token-ca.crt \
+  --from-literal=OCP_REG_USER="pipeline" \
+  --from-file=OCP_REG_TOKEN=./get-token-ca.crt \
   --from-file=HZN_CERTIFICATE=./icp-ca.crt \
   -o yaml --dry-run | \
 oc label -f - --dry-run --local -o yaml --local \
