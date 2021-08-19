@@ -33,9 +33,13 @@ test: build
 		echo "*** Service test failed! ***"; \
 		false ;}
 
+echo "reg_host is  ${OCP_REG_HOST}"
+echo "reg_token is ${OCP_REG_TOKEN}"
+
 # Publish the service to the Horizon Exchange for the current architecture
 publish-service:
-    hzn exchange service publish -I -O -r "${OCP_REG_HOST}:pipeline:${OCP_REG_TOKEN}" -f horizon/service.definition.json
+    hzn exchange service publish -I -O -r ${OCP_REG_HOST}\:pipeline\:${OCP_REG_TOKEN} -f horizon/service.definition.json
+
 
 # Target for travis to publish service and pattern after PR is merged  
 publish: 
