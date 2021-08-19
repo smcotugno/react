@@ -35,7 +35,7 @@ test: build
 
 # Publish the service to the Horizon Exchange for the current architecture
 publish-service:
-	hzn exchange service publish -I -O -r "image-registry.openshift-image-registry.svc:5000:iamapikey:$(EAMHUB_APIKEY)" -f horizon/service.definition.json
+    hzn exchange service publish -I -O -r "${OCP_REG_HOST}:pipeline:${OCP_REG_TOKEN}" -f horizon/service.definition.json
 
 # Target for travis to publish service and pattern after PR is merged  
 publish: 
