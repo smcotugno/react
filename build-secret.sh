@@ -15,20 +15,16 @@
 #
 # input validation
 
-if [ -z "$1" ]; then
-    echo -e "\n Missing agument.  Usage:  '${0} <Org ID> '\n"
+if [ -z "$2" ]; then
+    echo -e "\n Missing agument.  Usage:  '${0} <Org ID> <API KEY> '\n"
     exit 1
 fi
 
 export HZN_ORG_ID=$1
-
-
-# API Key is not needed 
-# export EDGE_APIKEY=$2
-# export HZN_EXCHANGE_USER_AUTH=iamapikey:${EDGE_APIKEY}
-#  --from-literal=HZN_EXCHANGE_USER_AUTH=$HZN_EXCHANGE_USER_AUTH \
+export EDGE_APIKEY=$2
 
 # Extract the Core meta data for
+export HZN_EXCHANGE_USER_AUTH=iamapikey:${EDGE_APIKEY}
 export MGM_HUB_INGRESS=$(oc get cm management-ingress-ibmcloud-cluster-info -n ibm-edge -o jsonpath='{.data.cluster_ca_domain}')
 export HZN_EXCHANGE_URL=https://${MGM_HUB_INGRESS}/edge-exchange/v1
 export HZN_FSS_CSSURL=https://${MGM_HUB_INGRESS}/edge-css/
@@ -41,6 +37,7 @@ oc serviceaccounts get-token pipeline > ./get-token-ca.crt
 # Create the Secret
 oc create secret generic edge-access \
   --from-literal=HZN_ORG_ID=$HZN_ORG_ID \
+  --from-literal=HZN_EXCHANGE_USER_AUTH=$HZN_EXCHANGE_USER_AUTH \
   --from-literal=HZN_EXCHANGE_URL=$HZN_EXCHANGE_URL \
   --from-literal=HZN_FSS_CSSURL=$HZN_FSS_CSSURL \
   --from-literal=OCP_REG_HOST=$OCP_REG_HOST \
