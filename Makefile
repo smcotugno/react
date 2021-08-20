@@ -33,10 +33,6 @@ test: build
 		echo "*** Service test failed! ***"; \
 		false ;}
 
-echo "reg_host is  ${IMG_REG_HOST}"
-echo "reg_user is  ${IMG_REG_USER}"
-echo "reg_token is ${IMG_REG_TOKEN}"
-
 # Publish the service to the Horizon Exchange for the current architecture
 publish-service:
     hzn exchange service publish -I -O -r ${IMG_REG_HOST}:${IMG_REG_USER}:${IMG_REG_TOKEN} -f horizon/service.definition.json
