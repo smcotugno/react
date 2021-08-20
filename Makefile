@@ -9,6 +9,8 @@ export ARCH = amd64
 # Configurable parameters passed to serviceTest.sh in "test" target
 export MATCH:='says: Hello'
 export TIME_OUT:=60
+export REG_HOST_USER_TOKEN:='${IMG_REG_HOST}:${IMG_REG_USER}:${IMG_REG_TOKEN}'
+
 
 # Build the docker image for the current architecture
 build:
@@ -35,7 +37,7 @@ test: build
 
 # Publish the service to the Horizon Exchange for the current architecture
 publish-service:
-	hzn exchange service publish -I -O -r '${IMG_REG_HOST}\:${IMG_REG_USER}\:${IMG_REG_TOKEN}' -f horizon/service.definition.json
+	hzn exchange service publish -I -O -r '${REG_HOST_USER_TOKEN}' -f horizon/service.definition.json
 
 # Target for travis to publish service and pattern after PR is merged  
 publish: 
