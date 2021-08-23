@@ -1,7 +1,7 @@
 {
     "HZN_ORG_ID": "dow",
     "MetadataVars": {
-        "DOCKER_IMAGE_BASE": "default-route-openshift-image-registry.dow-mvp-0063h00000ekgoj-afb9c6047b062b44e3f1b3ecfeba4309-0000.us-south.containers.appdomain.cloud/edge-react/react",
+        "DOCKER_IMAGE_BASE": "default-route-openshift-image-registry.dow-mvp-0063h00000ekgoj-afb9c6047b062b44e3f1b3ecfeba4309-0000.us-south.containers.appdomain.cloud/edge-react",
         "SERVICE_NAME": "maximo-dashboard",
         "SERVICE_VERSION": "0.0.5"
     }
